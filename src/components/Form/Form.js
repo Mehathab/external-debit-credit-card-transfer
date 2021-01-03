@@ -13,6 +13,8 @@ const Form = ({ onSubmit, onCancel, cardHolderName }) => {
   const { bind: ccBnd_Security, value: ccSecurity } = useSimpleInput();
   const { bind: transferAmountBnd, value: transferAmount } = useSimpleInput();
   const { bind: transferAccountBnd, value: traferAccount } = useSimpleInput();
+  // const [value, setValue] = useState("");
+  // const propObj = { value, onChange: (e) => setValue(e.target.value) };
 
   const onContinue = () =>
     onSubmit({
@@ -35,6 +37,7 @@ const Form = ({ onSubmit, onCancel, cardHolderName }) => {
         title='Cardholder Information'
         cardHolderName={cardHolderName}
       />
+      {/* <input {...propObj} /> */}
       <button onClick={onContinue}>Continue</button>
     </section>
   );

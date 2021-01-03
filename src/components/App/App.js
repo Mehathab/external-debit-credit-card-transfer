@@ -11,10 +11,11 @@ const App = () => {
     { isPending, isSuccess, isError, successData, errorData },
     dispatchGetCardholderInfo,
   ] = useApiReducer(getCardholderInfo);
+  // useApiReduce(somePromise) => [state, dispatchAction]
   const [showReview, setShowReview] = useState(false);
   const [formState, setFormState] = useState(null);
 
-  const onContinue = (state) => {
+  const onContinueParent = (state) => {
     setFormState(state);
     setShowReview(true);
   };
@@ -22,13 +23,30 @@ const App = () => {
   useEffect(() => {
     dispatchGetCardholderInfo();
   }, []);
-  return (
-    <main>
-      <Title content={isPending ? "Pending" : "Hi! there"} />
-      <HelperText content={isPending ? "Pending" : "Helper Text goes here"} />
-      <Form cardHolderName={successData?.[0]?.login} onSubmit={onContinue} />
-      {showReview && <ReviewForm formState={formState} />}
-    </main>
+
+  // const isFundCheckApproved = successData?.[0]?.login.length > 5
+  const showError = isError;
+
+  return showError ? (
+    <>
+      <main>
+        {!showReview && (
+          <>
+            <Title content={isPending ? "Pending" : "Hi! there"} />
+            <HelperText
+              content={isPending ? "Pending" : "Helper Text goes here"}
+            />
+            <Form
+              cardHolderName={successData?.[0]?.login}
+              onSubmit={onContinueParent}
+            />
+          </>
+        )}
+        {showReview && <ReviewForm formState={formState} />}
+      </main>
+    </>
+  ) : (
+    "SHOW ERROR"
   );
 };
 
