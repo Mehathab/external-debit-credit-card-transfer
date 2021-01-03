@@ -1,0 +1,14 @@
+.container {
+  width: 75rem;
+  display: inline-flex;
+}
+.label {
+  min-width: 20rem;
+  margin: 0.5rem 1rem;
+  text-align: center;
+}
+.value {
+  min-width: 20rem;
+  margin: 0.5rem 1rem;
+  text-align: left;
+}
